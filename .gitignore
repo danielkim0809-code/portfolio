@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.firebase/
+*-debug.log*
+.env
+.env.*
+!.env.example
+.firebaserc
+secrets/
+*service-account*.json
+*serviceAccount*.json
+*-firebase-adminsdk-*.json
+*.pem
+.DS_Store
+Thumbs.db

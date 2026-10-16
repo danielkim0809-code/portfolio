@@ -1,0 +1,81 @@
+name: CI and Firebase Hosting
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portfolio-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build portfolio
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-dist
+          path: dist
+          if-no-files-found: error
+          retention-days: 7
+      - name: Firebase setup status
+        if: vars.FIREBASE_PROJECT_ID == ''
+        run: echo 'Firebase deployment is disabled. Follow docs/FIREBASE_SETUP.md to set FIREBASE_PROJECT_ID and FIREBASE_SERVICE_ACCOUNT.' >> "$GITHUB_STEP_SUMMARY"
+
+  deploy:
+    name: Deploy live site
+    needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.FIREBASE_PROJECT_ID != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - uses: actions/download-artifact@v4
+        with:
+          name: portfolio-dist
+          path: dist
+      - name: Check Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          FIREBASE_PROJECT_ID: ${{ vars.FIREBASE_PROJECT_ID }}
+        run: |
+          node --input-type=module <<'NODE'
+          const raw = process.env.FIREBASE_SERVICE_ACCOUNT;
+          if (!raw) throw new Error('Add the FIREBASE_SERVICE_ACCOUNT repository secret. See docs/FIREBASE_SETUP.md.');
+          let account;
+          try { account = JSON.parse(raw); } catch { throw new Error('FIREBASE_SERVICE_ACCOUNT must contain the complete downloaded JSON, not a file path.'); }
+          if (account.type !== 'service_account' || !account.client_email || !account.private_key?.includes('BEGIN PRIVATE KEY')) {
+            throw new Error('Use a real service account JSON key, not the example file.');
+          }
+          if (account.project_id !== process.env.FIREBASE_PROJECT_ID) throw new Error('The service account project_id must match FIREBASE_PROJECT_ID.');
+          NODE
+      - name: Deploy to Firebase Hosting
+        id: hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: ${{ vars.FIREBASE_PROJECT_ID }}
+          channelId: live
+          firebaseToolsVersion: "15.34.0"
+      - name: Deployment summary
+        env:
+          HOSTING_URL: ${{ steps.hosting.outputs.details_url }}
+        run: printf 'Firebase Hosting deployed successfully.\n\n%s\n' "$HOSTING_URL" >> "$GITHUB_STEP_SUMMARY"

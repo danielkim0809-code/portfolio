@@ -1,0 +1,20 @@
+{
+  "name": "daniel-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "firebase": "npx --yes firebase-tools@15.34.0",
+    "firebase:configure": "node scripts/configure-firebase.mjs",
+    "deploy": "npm run build && npm run firebase -- deploy --only hosting"
+  },
+  "devDependencies": {
+    "vite": "8.3.4"
+  }
+}

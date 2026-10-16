@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f4ef" />
+    <meta
+      name="description"
+      content="Daniel Kim의 포트폴리오. 아이디어를 웹 경험으로 만드는 과정을 기록합니다."
+    />
+    <title>Daniel Kim — Portfolio</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">본문으로 바로가기</a>
+    <header class="site-header wrap">
+      <a class="wordmark" href="#" aria-label="Daniel Kim 홈"
+        >dk<span>®</span></a
+      >
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="navigation"
+      >
+        메뉴 <span>+</span>
+      </button>
+      <nav id="navigation" aria-label="주 메뉴">
+        <a href="#work">프로젝트 <span>01</span></a>
+        <a href="#about">소개 <span>02</span></a>
+        <a class="nav-contact" href="#contact"
+          >이야기 나누기 <span aria-hidden="true">↗</span></a
+        >
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero wrap" aria-labelledby="hero-title">
+        <div class="eyebrow">
+          <span class="status-dot"></span> DANIEL KIM
+          <span class="hero-label">PORTFOLIO / 2026</span>
+        </div>
+        <h1 id="hero-title">
+          작은 아이디어를,<br /><span>쓸모 있는 경험으로.</span>
+        </h1>
+        <div class="hero-bottom">
+          <p>
+            생각을 코드로 옮기고, 더 나은 경험을 고민합니다.<br />만들고 배우는
+            과정을 이곳에 차곡차곡 담습니다.
+          </p>
+          <a class="circle-link" href="#work"
+            ><span>작업 둘러보기</span
+            ><span class="circle" aria-hidden="true">↓</span></a
+          >
+        </div>
+        <div class="hero-index" aria-hidden="true">
+          <span>DESIGN MINDED. CODE DRIVEN.</span
+          ><span>SCROLL TO EXPLORE ↓</span>
+        </div>
+      </section>
+
+      <section
+        id="work"
+        class="work wrap section-space"
+        aria-labelledby="work-title"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">01 / SELECTED WORK</p>
+            <h2 id="work-title">
+              만들어가는 것들<span class="orange">.</span>
+            </h2>
+          </div>
+          <p class="section-note">첫 시작부터, 다음 아이디어까지.</p>
+        </div>
+        <div class="projects" id="projects"></div>
+        <p class="template-note">
+          첫 번째는 이 사이트이며, 나머지 항목은 실제 작업으로 교체할 포트폴리오
+          예시입니다.
+        </p>
+      </section>
+
+      <section
+        id="about"
+        class="about section-space"
+        aria-labelledby="about-title"
+      >
+        <div class="wrap about-grid">
+          <div>
+            <p class="eyebrow">02 / A LITTLE ABOUT ME</p>
+            <div class="monogram" aria-hidden="true">
+              d<span>k</span><i>✳</i>
+            </div>
+          </div>
+          <div class="about-copy">
+            <h2 id="about-title">좋은 질문에서<br />다음 작업을 시작합니다.</h2>
+            <p>
+              안녕하세요, Daniel Kim입니다.<br />이곳은 새로운 시도와 배움을
+              모아두는 개인 포트폴리오입니다.
+            </p>
+            <p class="muted">
+              앞으로 진행할 프로젝트의 문제, 선택한 방법, 그리고 배운 점을
+              하나씩 기록하려 합니다. 이 소개 문구와 아래 키워드는 나만의
+              이야기로 바꿔보세요.
+            </p>
+            <div class="tags" aria-label="소개 키워드 예시">
+              <span>웹 개발</span><span>사용자 경험</span
+              ><span>꾸준한 기록</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="contact"
+        class="contact wrap section-space"
+        aria-labelledby="contact-title"
+      >
+        <p class="eyebrow">
+          <span class="status-dot"></span> 03 / LET’S CONNECT
+        </p>
+        <div class="contact-row">
+          <h2 id="contact-title">
+            다음 이야기는<br /><span>함께 만들어요.</span>
+          </h2>
+          <a
+            class="contact-arrow"
+            href="https://github.com/danielkim0809-code"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Daniel Kim GitHub 새 탭에서 열기"
+            >↗</a
+          >
+        </div>
+        <div class="contact-bottom">
+          <p>프로젝트와 새로운 시도는 GitHub에서 만나보세요.</p>
+          <a
+            href="https://github.com/danielkim0809-code"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub · @danielkim0809-code <span aria-hidden="true">↗</span></a
+          >
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer wrap">
+      <span>© <span id="year">2026</span> Daniel Kim</span
+      ><span>BUILT WITH CURIOSITY <span class="orange">✳</span></span
+      ><a href="#">맨 위로 ↑</a>
+    </footer>
+    <dialog id="project-dialog" aria-labelledby="dialog-title">
+      <div class="dialog-top">
+        <span class="eyebrow" id="dialog-label"></span
+        ><button
+          id="close-dialog"
+          type="button"
+          aria-label="프로젝트 상세 닫기"
+        >
+          닫기 ×
+        </button>
+      </div>
+      <h2 id="dialog-title"></h2>
+      <p id="dialog-description"></p>
+      <div class="tags" id="dialog-tags"></div>
+      <a
+        id="dialog-link"
+        class="text-link"
+        target="_blank"
+        rel="noopener noreferrer"
+        >저장소 보기 ↗</a
+      >
+    </dialog>
+  </body>
+</html>
