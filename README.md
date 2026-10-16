@@ -23,17 +23,25 @@ npm.cmd run build      # 배포 파일을 dist/에 생성
 npm.cmd run preview    # 빌드 결과 미리보기
 ```
 
-## Firebase 최초 설정
+## 연결된 Firebase 환경
 
-**[Firebase 연결 및 CI/CD 가이드](docs/FIREBASE_SETUP.md)**를 순서대로 따라가세요.
+- 운영 사이트: https://portfolio-10340.web.app
+- Firebase 프로젝트 및 Hosting 사이트 ID: `portfolio-10340`
+- 로컬 설정: `.firebaserc` (Git 제외)
+- GitHub Actions Variable: `FIREBASE_PROJECT_ID`
+- GitHub Actions Secret: `FIREBASE_SERVICE_ACCOUNT`
+- 배포용 서비스 계정: `github-portfolio-deploy@portfolio-10340.iam.gserviceaccount.com`
 
-1. Firebase 프로젝트를 생성하고 Hosting을 시작합니다.
-2. `npm.cmd run firebase:configure -- 실제-프로젝트-ID`로 로컬 `.firebaserc`를 생성합니다.
-3. 배포용 서비스 계정의 실제 JSON 키를 발급합니다.
-4. GitHub에 Secret `FIREBASE_SERVICE_ACCOUNT`와 Variable `FIREBASE_PROJECT_ID`를 등록합니다.
-5. GitHub Actions에서 `CI and Firebase Hosting`을 수동 실행하거나 `main`에 푸시합니다.
+`main`에 푸시하면 빌드를 거쳐 위 Hosting 사이트에 배포합니다. Google 계정으로 직접 배포할 때는 `npm.cmd run deploy`를 사용합니다.
 
-Firebase 프로젝트 ID가 등록되기 전에는 빌드만 실행되고 배포 작업은 건너뜁니다. 등록 후에는 인증 정보 누락·불일치를 배포 오류로 표시합니다. 저장소에 설정을 올리는 것만으로 Firebase 프로젝트가 생성되지는 않습니다.
+다른 PC의 로컬 설정은 아래처럼 생성합니다:
+
+```powershell
+npm.cmd run firebase:configure -- portfolio-10340
+npm.cmd run firebase -- login --interactive
+```
+
+자격 증명 교체와 새 환경 연결은 **[Firebase 연결 및 CI/CD 가이드](docs/FIREBASE_SETUP.md)**를 참고하세요. 인증 JSON은 GitHub Secret에 저장하며 소스에 포함하지 않습니다.
 
 ## CI/CD 흐름
 

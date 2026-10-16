@@ -9,7 +9,7 @@ export const projects = [
     visual: "portfolio",
     tags: ["Vite", "JavaScript", "Firebase Hosting"],
     description:
-      "지금 보고 있는 포트폴리오의 시작 버전입니다. 반응형 홈페이지와 GitHub Actions 빌드 검증, Firebase Hosting 배포 구성을 담았습니다. Firebase 프로젝트와 GitHub 인증 설정을 마치면 자동 배포가 활성화됩니다.",
+      "지금 보고 있는 포트폴리오의 시작 버전입니다. 반응형 홈페이지와 GitHub Actions 빌드 검증, Firebase Hosting 배포 구성을 담았습니다. Firebase Hosting에 연결되어 있으며, GitHub main 브랜치에 변경 사항을 올리면 빌드 후 자동 배포됩니다.",
     url: "https://github.com/danielkim0809-code/portfolio",
   },
   {

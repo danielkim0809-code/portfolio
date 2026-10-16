@@ -1,6 +1,6 @@
 # Firebase Hosting 연결 및 GitHub Actions 설정
 
-이 가이드는 Firebase 프로젝트가 없는 상태에서 시작합니다. 이미 작성한 `firebase.json`과 워크플로를 사용하므로 `firebase init`으로 파일을 다시 생성할 필요가 없습니다.
+현재 운영 프로젝트는 `portfolio-10340`, 사이트 주소는 https://portfolio-10340.web.app 입니다. 배포 계정은 `github-portfolio-deploy@portfolio-10340.iam.gserviceaccount.com`이며, 인증 키는 GitHub의 `FIREBASE_SERVICE_ACCOUNT` Secret에서 관리합니다. 아래는 새 환경 연결 및 인증 정보 재설정 절차입니다. 이미 작성한 `firebase.json`과 워크플로를 사용하므로 `firebase init`으로 파일을 다시 생성할 필요가 없습니다.
 
 ## 1. Firebase 프로젝트 생성
 
@@ -18,7 +18,7 @@ PowerShell:
 ```powershell
 cd C:\dev\portfolio
 npm.cmd ci
-npm.cmd run firebase -- login
+npm.cmd run firebase -- login --interactive
 npm.cmd run firebase -- projects:list
 npm.cmd run firebase:configure -- YOUR_PROJECT_ID
 ```
@@ -61,6 +61,7 @@ npm.cmd run firebase -- emulators:start --only hosting
 3. 이 사이트의 live Hosting 배포에 필요한 역할을 부여합니다:
    - **Firebase Hosting 관리자** (`roles/firebasehosting.admin`)
    - **API 키 뷰어** (`roles/serviceusage.apiKeysViewer`)
+   - **서비스 사용량 소비자** (`roles/serviceusage.serviceUsageConsumer`)
 4. 계정 상세 → **키 → 키 추가 → 새 키 만들기 → JSON**에서 다운로드합니다.
 5. 다운로드한 JSON 전체를 다음 단계의 GitHub Secret 값으로 등록합니다.
 
